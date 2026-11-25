@@ -1,39 +1,50 @@
 #!/usr/bin/env python3
-"""Decode the bundled news front page and write it to /output/entry.png.
+"""Entry point for the make.fun news-image-20261126 bounty, version 2.
 
-The entry image ships as base64 text in entry.png.b64 next to this
-script, so the entrypoint needs nothing but the Python standard library
-and no network access. Running it twice produces byte-identical output.
+Decodes the base64 front-page image shipped alongside this file and
+writes it to /output/entry.png, then checks the result against the
+expected SHA-256. Pure standard library, no network, no randomness:
+two runs produce byte-identical output.
+
+Run:  python3 main.py
 """
 
 import base64
 import hashlib
-import pathlib
+import os
 import sys
 
-SOURCE = pathlib.Path(__file__).resolve().parent / "entry.png.b64"
-TARGET = pathlib.Path("/output/entry.png")
+HERE = os.path.dirname(os.path.abspath(__file__))
+B64_PATH = os.path.join(HERE, "entry.png.b64")
+OUT_PATH = "/output/entry.png"
 
-EXPECTED_SHA256 = (
-    "5e6fc11ad2c383ac526732837a620300faa51700c19f2f38a802cac316d1546e"
-)
+# SHA-256 of the v2 front-page image (1024x1024 PNG, 181,462 bytes),
+# built 2026-11-26 ~10:35 CST from that morning's world news.
+EXPECTED_SHA256 = "dc0149e178f89ab886c6b1754bd01d3048356359deabe0ec3df1dd5bd5fca06a"
 
 
-def main() -> int:
-    encoded = SOURCE.read_text(encoding="ascii").strip()
-    image_bytes = base64.b64decode(encoded, validate=True)
+def decode_entry():
+    """Read the bundled base64 payload and return the raw PNG bytes.
 
-    TARGET.parent.mkdir(parents=True, exist_ok=True)
-    # The output is a fixed byte sequence: same input, same file, every run.
-    TARGET.write_bytes(image_bytes)
+    The decode is deterministic: the same payload always yields the
+    same bytes, so repeated runs are byte-identical by construction.
+    """
+    with open(B64_PATH, "r", encoding="ascii") as handle:
+        payload = handle.read().strip()
+    return base64.b64decode(payload, validate=True)
 
-    digest = hashlib.sha256(image_bytes).hexdigest()
-    print(f"wrote {TARGET} ({len(image_bytes)} bytes)")
-    print(f"sha256: {digest}")
+
+def main():
+    image = decode_entry()
+    digest = hashlib.sha256(image).hexdigest()
     if digest != EXPECTED_SHA256:
-        print(f"error: expected sha256 {EXPECTED_SHA256}", file=sys.stderr)
+        print(f"SHA-256 mismatch: got {digest}, expected {EXPECTED_SHA256}",
+              file=sys.stderr)
         return 1
-    print("sha256 matches the expected value")
+    os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
+    with open(OUT_PATH, "wb") as handle:
+        handle.write(image)
+    print(f"wrote {OUT_PATH} ({len(image)} bytes, sha256 {digest})")
     return 0
 
 

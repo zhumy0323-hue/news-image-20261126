@@ -1,56 +1,60 @@
-# Sum up 26 November's world news in one image
+# The Thursday Paper — 26 November 2026 (v2)
 
 [![make.fun · news-image-20261126](https://make.fun/badge/news-image-20261126.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
-[![rank](https://make.fun/badge/news-image-20261126/zhumy0323-hue/news-image-20261126/rank.svg)](https://make.fun/bounty/news-image-20261126/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
-[![reward](https://make.fun/badge/news-image-20261126/zhumy0323-hue/news-image-20261126/reward.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+[![make.fun · rank](https://make.fun/badge/news-image-20261126/rank.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+[![make.fun · reward](https://make.fun/badge/news-image-20261126/reward.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
 
-This is a single 1024x1024 front page, **THE THURSDAY PAPER**, that sums up
-the world news of Thursday 26 November 2026 in one image: 36 stories from
-7 continents across 16 fields, laid out as a newspaper you can read at a
-glance.
+One image that sums up Thursday 26 November 2026's world news:
+36 stories from 7 continents, laid out as a newspaper front page.
+This is version 2 of the entry — the same front-page family as v1,
+rebuilt at about 10:35 CST with the morning's new developments.
+
+## What changed in v2
+
+- **New leads:** a fuel tanker fire kills 31 on a Cairo ring road;
+  Ukraine strikes the Savasleyka air base, damaging five jets;
+  the Bank of Korea raises its rate to 3.25% on an AI export boom.
+- **New smaller stories:** a second US judge blocks the birthright
+  citizenship order; judges urge dropping a Netanyahu bribery case;
+  34 nations call on Russia to halt riot-gas use; the Murmansk
+  governor is held on corruption charges; a Houthi drone hits
+  Riyadh's tallest tower again; Australia passes an online safety
+  law with fines of up to 5% of revenue.
+- **Kept from v1** (still Thursday's news): Russia's own death toll
+  near 500,000, the North Korea expulsion of the Swiss envoy, the
+  Malaysia–Google suit and the Bangladesh garment wage rise.
+- The timeline strip now mixes late-25-Nov UTC and early-26-Nov UTC
+  first-report times, because v2 was built after the UTC day began.
+  The DATE CHECK box still lists what was left out as earlier news,
+  including the Duran Duran guitarist's death (23 Nov).
 
 ## What's on the page
 
-- **Three leads.** Russia's own figures put the Ukraine war death toll at
-  nearly 500,000; North Korea orders the Swiss diplomatic office shut
-  within 48 hours; Lebanon opens its second airport at Kleiat next month.
-- **Ten illustrated small stories**, each carrying a verification badge —
-  CONFIRMED, OFFICIAL or REPORTED — so the reader can see at a glance how
-  solid each item is.
-- **Twenty-three short items** in the also-listed column, one line each.
-- **A UTC timeline strip** showing first-report times, a figures strip,
-  and a region bar breaking the 36 stories down by continent.
-- **A world map with 14 numbered pins** marking where the stories happened.
-- **A DATE CHECK box** separating today's news from earlier stories that
-  look similar but belong to 24 or 25 November, plus a footer legend
-  explaining the badges and pins.
-- The masthead notes Constitution Day in India and the 18th anniversary
-  of the 26/11 Mumbai attacks.
-- The finished image is a single 1024x1024 PNG, 178,745 bytes, well under
-  the 1 MiB limit. The drawing is original front-page art made for this
-  field: death-toll bars, an expulsion door and a runway scene for the
-  leads, and small slot-sized illustrations for the ten small stories.
+- Masthead: Thursday 26 November 2026, Constitution Day in India,
+  18th anniversary of the 26/11 Mumbai attacks.
+- Three leads with drawn art, ten smaller stories with art and a
+  CONFIRMED / REPORTED status badge, and 23 more stories in the
+  also-list — 36 stories in total, across 13 fields.
+- A first-reported timeline, a figures strip, a region bar
+  (Europe 7, Asia 10, Middle East 5, Africa 6, N. America 4,
+  S. America 2, Oceania 2), a world map with 14 numbered pins,
+  a DATE CHECK box and a sources footer.
 
-## Running it
+## Run it
 
-```sh
+```bash
 python3 main.py
 ```
 
-The script reads `entry.png.b64` from this directory, decodes it and
-writes the image to `/output/entry.png` (creating the directory if
-needed). It uses only the Python standard library, needs no network, and
-prints the byte count and SHA-256 of the image. The SHA is checked
-against the expected value, and the script exits with an error if it
-does not match. Running it twice writes byte-identical output. The
-bounty entrypoint is `python3.13`.
+This decodes `entry.png.b64` into `/output/entry.png` (1024×1024
+PNG, 181,462 bytes) and verifies its SHA-256 before writing.
+Only the Python standard library is used, so the output is
+identical on every run.
 
-## A note on dates
+Entrypoint: `python3 main.py` — no arguments, no setup step.
 
-The image was built on 26 November at about 07:00 CST, before the UTC
-day began, so the timeline strip shows first-report UTC times — which
-fall on 25 November UTC (04:26–14:32). Every story in the image comes
-from the 26 November daily news summaries; none is dated 24 November
-or earlier.
+## Sources
 
-<!-- Entry for the make.fun news-image-20261126 bounty ($100, free entry). -->
+Reuters, AP, AFP, BBC, UN News, TOI, Al Jazeera, RFE/RL —
+all stories are from the 26 November 2026 daily summaries.
+Bounty: https://make.fun/bounty/news-image-20261126
