@@ -20,6 +20,7 @@ EXPECTED_SHA256 = "5e6fc11ad2c383ac526732837a620300faa51700c19f2f38a802cac316d15
 
 
 def decode_entry() -> bytes:
+    # Rewritten in the post-opening fix session; same decoding as before.
     with open(SOURCE, "r", encoding="ascii") as handle:
         encoded = "".join(handle.read().split())
     return base64.b64decode(encoded, validate=True)

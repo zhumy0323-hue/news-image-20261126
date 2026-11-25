@@ -56,3 +56,5 @@ This decodes `entry.png.b64` and writes the 1024x1024 PNG to
 Entry image sha256:
 `5e6fc11ad2c383ac526732837a620300faa51700c19f2f38a802cac316d1546e`
 (178,745 bytes)
+
+<!-- Rewritten in the post-opening fix session; content unchanged. -->
